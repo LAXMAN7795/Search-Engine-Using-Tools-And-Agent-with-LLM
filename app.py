@@ -5,22 +5,30 @@ from langchain.agents import initialize_agent, AgentType
 from langchain.callbacks import StreamlitCallbackHandler
 from langchain_groq import ChatGroq
 from langchain.tools import Tool
-import os
-from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
+# ---------------- STREAMLIT UI ---------------- #
+st.set_page_config(page_title="LangChain Chat with Search", page_icon="🔍")
+st.title("🔍 LangChain Chat with Search")
+
+st.sidebar.title("Settings")
+
+# ---------------- API KEY (STREAMLIT SECRETS) ---------------- #
+try:
+    api_key = st.secrets["GROQ_API_KEY"]
+except:
+    st.error("⚠️ GROQ_API_KEY not found. Please add it in Streamlit Secrets.")
+    st.stop()
 
 # ---------------- TOOLS ---------------- #
 
-# Wikipedia Tool
+# Wikipedia
 api_wrapper_wiki = WikipediaAPIWrapper(top_k_results=1, doc_content_chars_max=250)
 wiki = WikipediaQueryRun(api_wrapper=api_wrapper_wiki)
 
-# DuckDuckGo Search Tool
+# DuckDuckGo Search
 search = DuckDuckGoSearchRun(name="Search")
 
-# Arxiv Tool (SAFE WRAPPER to avoid 429 error)
+# Arxiv (safe wrapper)
 api_wrapper_arxiv = ArxivAPIWrapper(top_k_results=1, doc_content_chars_max=200)
 
 def safe_arxiv(query):
@@ -35,33 +43,17 @@ arxiv = Tool(
     description="Search academic papers from Arxiv"
 )
 
-# ---------------- STREAMLIT UI ---------------- #
-
-st.set_page_config(page_title="LangChain Chat with Search", page_icon="🔍")
-st.title("🔍 LangChain Chat with Search")
-
-st.sidebar.title("Settings")
-
-# API Key
-api_key = os.getenv("GROQ_API_KEY")
-
-if not api_key:
-    st.error("⚠️ GROQ_API_KEY not found. Please set it in .env file.")
-    st.stop()
-
 # ---------------- CHAT MEMORY ---------------- #
-
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
-        {"role": "assistant", "content": "Hi, I am chatbot. How can I help you."}
+        {"role": "assistant", "content": "Hi, I am chatbot. How can I help you?"}
     ]
 
-# Display chat history
+# Display messages
 for msg in st.session_state.messages:
-    st.chat_message(msg['role']).write(msg['content'])
+    st.chat_message(msg["role"]).write(msg["content"])
 
 # ---------------- USER INPUT ---------------- #
-
 if prompt := st.chat_input("Ask something..."):
 
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -73,7 +65,7 @@ if prompt := st.chat_input("Ask something..."):
         model="llama-3.3-70b-versatile"
     )
 
-    # Tools
+    # Tools list
     tools = [search, wiki, arxiv]
 
     # Agent
@@ -90,7 +82,7 @@ if prompt := st.chat_input("Ask something..."):
 
         try:
             response = search_agent.run(prompt, callbacks=[st_cb])
-        except Exception as e:
+        except Exception:
             response = "⚠️ Something went wrong. Please try again."
 
         st.session_state.messages.append({"role": "assistant", "content": response})
