@@ -2,7 +2,6 @@ streamlit
 langchain==0.1.16
 langchain-community==0.0.32
 langchain-groq==0.1.4
-langchain-huggingface
 python-dotenv
 duckduckgo-search
 wikipedia
