@@ -10,8 +10,6 @@ from langchain.tools import Tool
 st.set_page_config(page_title="LangChain Chat with Search", page_icon="🔍")
 st.title("🔍 LangChain Chat with Search")
 
-st.sidebar.title("Settings")
-
 # ---------------- API KEY (STREAMLIT SECRETS) ---------------- #
 try:
     api_key = st.secrets["GROQ_API_KEY"]
