@@ -1,90 +1,149 @@
-#📌 LangChain Search Agent — Streamlit App
+# 🔍 LangChain Chat with Search (Agent-Based Chatbot)
 
-This project is a conversational search-powered chatbot built with LangChain, Groq Llama 3.3, DuckDuckGo, Wikipedia, and ArXiv tools.
-Users can chat with the assistant and get real-time search results from the web and scientific databases.
+🚀 **Live Demo:**
+👉 [https://your-streamlit-app-link](https://search-engine-using-tools-and-agent-with-llm-llvqkm3np6fgmixuq.streamlit.app/)
 
-🚀 Features
+---
 
-✅ Conversational chatbot interface
-✅ Uses Groq LLM for fast responses
-✅ Integrates three external information sources:
+## 📌 Overview
 
-🔍 DuckDuckGo Search
+This project is an **AI-powered Search Agent Chatbot** built using LangChain and Groq.
+It can intelligently answer user queries by dynamically using multiple tools such as:
 
-📚 Wikipedia
+* 🌐 Web Search (DuckDuckGo)
+* 📚 Wikipedia
+* 📄 Arxiv (Research Papers)
 
-📄 ArXiv Research Papers
+Unlike traditional chatbots, this system uses an **Agent-based architecture**, allowing the LLM to decide which tool to use for better answers.
 
-✅ Friendly UI with Streamlit
-✅ Maintains full chat history
+---
 
-🧰 Tech Stack
-Technology	Usage
-Streamlit	UI & Chat Interface
-LangChain	Agent + Tool Management
-Groq Llama3.3	Response generation
-Wikipedia API	Factual lookup
-Arxiv API	Research lookup
-DuckDuckGo	Web search
-📦 Installation
+## ✨ Features
 
-Clone the repository:
+* 💬 ChatGPT-style conversational UI
+* 🧠 Intelligent tool selection using LangChain Agents
+* 🌐 Real-time web search integration
+* 📚 Wikipedia-based answers
+* 📄 Arxiv research paper search (with rate-limit handling)
+* ⚡ Fast responses using Groq LLM (LLaMA 3.3 70B)
+* ☁️ Deployed on Streamlit Cloud
 
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+---
 
+## 🏗️ Tech Stack
 
-Create and activate virtual environment:
+* **Frontend:** Streamlit
+* **LLM:** Groq (LLaMA 3.3 70B)
+* **Framework:** LangChain
+* **Tools:**
 
-python -m venv venv
-venv\Scripts\activate  # Windows
-# source venv/bin/activate  (Mac/Linux)
+  * DuckDuckGo Search
+  * Wikipedia API
+  * Arxiv API
 
+---
 
-Install dependencies:
+## ⚙️ How It Works
 
+1. User enters a query
+2. LangChain Agent analyzes the question
+3. Decides which tool to use:
+
+   * Wikipedia → for definitions
+   * Search → for latest info
+   * Arxiv → for research papers
+4. Retrieves information
+5. LLM generates final response
+
+---
+
+## 🛠️ Installation (Local Setup)
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
+
+### 2️⃣ Create Conda environment
+
+```bash
+conda create -n search_agent_env python=3.10
+conda activate search_agent_env
+```
+
+### 3️⃣ Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-🔑 Environment Variables
+---
 
-Create a .env file in the project root:
+## 🔐 Environment Variables
 
-HUGGINGFACE_API_KEY=your_huggingface_key
-GROQ_API_KEY=your_groq_key
+Create a `.env` file (for local use):
 
+```env
+GROQ_API_KEY=your_api_key_here
+```
 
-✅ API keys must be valid or the app won't run.
+---
 
-▶️ Run the App
+## ▶️ Run the App
+
+```bash
 streamlit run app.py
+```
 
+---
 
-✅ Open the browser — Streamlit UI will appear!
-Enter Groq API key in sidebar → Start chatting with the bot 💬
+## ☁️ Deployment (Streamlit Cloud)
 
-📌 Sample Conversation
+1. Push code to GitHub
+2. Go to Streamlit Cloud
+3. Deploy your app
+4. Add secret:
 
-User: What is Machine Learning?
-Bot: Machine learning is a branch of artificial intelligence where systems learn…
+```toml
+GROQ_API_KEY="your_key_here"
+```
 
-📁 Project Structure
-📂 Langchain_Search_App
- ├── app.py
- ├── requirements.txt
- ├── .env (Not in Git — Sensitive)
- ├── README.md
+---
 
-🔒 Security Notes
+## 📸 Screenshots
 
-✅ .env should not be pushed to GitHub
-✅ API keys must remain private
-✅ Add to .gitignore:
+*(Add your app screenshots here)*
 
-.env
-venv/
-__pycache__/
+---
 
-🙌 Author
+## 📚 Key Learnings
 
-👤 Laxman Sannu Gouda
-📧 laxman.sg0104@gmail.com
+* Built Agent-based AI system using LangChain
+* Integrated multiple external tools dynamically
+* Handled API rate limits (Arxiv 429 error)
+* Deployed real-world AI application
+
+---
+
+## 🔮 Future Improvements
+
+* 💬 Add memory-aware agent
+* 🔗 Combine with RAG (PDF chatbot)
+* 📊 Add more tools (news, finance APIs)
+* 🎨 Improve UI/UX
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to fork and improve.
+
+---
+
+## ⭐ Support
+
+If you like this project, please ⭐ the repository!
+
+---
