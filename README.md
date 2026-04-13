@@ -112,9 +112,9 @@ GROQ_API_KEY="your_key_here"
 
 ---
 
-## 📸 Screenshots
+## 📸 Screenshot
 
-*(Add your app screenshots here)*
+![App Screenshot](ChatBotUI.png)
 
 ---
 
